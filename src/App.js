@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Beers from './beers.js';
 import LineChart from './LineChart';
+import {createData} from './helpers';
 class App extends Component {
   state = {
     data: [{name: "Budweiser",  abv: 4.5, ibu: 7.5, category: "North American Lager"},
@@ -11,36 +12,16 @@ class App extends Component {
           {name: "Anchor",  abv: 8, ibu: 9, category: "North American Origin Ales"},
            {name: "Laguanitas",  abv: 9, ibu: 10, category: 'North American Origin Ales'},
          ],
-    realData: []
+    realData: createData(Beers.data)
   }
 
 
   componentWillMount(){
-    console.log(Beers);
-    let createData = (data) => {
-      let theArray = [];
-      for(let dataItem of data){
-        let map = {};
-        map.name = dataItem.name;
-        if(dataItem.style.hasOwnProperty("ibuMax")){
-        map.ibu = parseInt(dataItem.style.ibuMax);
-      } else {
-        map.ibu = 0;
-      }
-         if(dataItem.style.hasOwnProperty("abvMax")){
-        map.abv = parseInt(dataItem.style.abvMax);
-      } else {
-        map.abv = 0;
-      }
-        map.category = dataItem.style.category.name;
-        theArray.push(map);
-      }
-      return theArray;
-    }
-    this.setState({
-      realData: createData(Beers.data)
-    });
-    console.log(this.state.realData);
+    // console.log(Beers);
+    // this.setState({
+    //   realData: createData(Beers.data)
+    // });
+    // console.log(this.state.realData);
     }
 
   render() {

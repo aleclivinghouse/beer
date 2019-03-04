@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import * as d3 from "d3";
-import {select, csv, scaleLinear, max, min, scaleBand, axisLeft, axisBottom} from 'd3';
+import {select, csv, scaleLinear, scaleOrdinal, max, min, scaleBand, axisLeft, axisBottom, legend} from 'd3';
 import './LineChart.css';
+import { colorLegend } from './ColorLegend';
 
 class LineChart extends Component {
    componentWillMount() {
@@ -13,11 +14,12 @@ class LineChart extends Component {
      console.log('thi is the data in d3');
      console.log(data);
      const circleRadius = 18;
-     var margin = {top: 20, right: 20, bottom: 70, left: 100};
-     let width = 800 - margin.left - margin.right;
-     let height = 400 - margin.top - margin.bottom;
+     var margin = {top: 40, right: 20, bottom: 70, left: 100};
+     let width = 1000 - margin.left - margin.right;
+     let height = 700 - margin.top - margin.bottom;
      const innerWidth = width - margin.left - margin.right;
      const innerHeight = height - margin.top - margin.bottom;
+
      //this determines the fill of the circles
      const categoryFill = arg => {
       if(arg === "North American Lager"){
@@ -41,10 +43,22 @@ class LineChart extends Component {
      const svg = d3.select("body").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
+      const colorScale = scaleOrdinal()
+  .domain(['North American Lager', 'North American Ales', 'North American Origin Ales', 'Hybrid/mixed Beer', "Belgian And French Origin Ales", "Malternative Beverages", "Other"])
+  .range(['red', 'yellow', 'orange', 'blue', 'green', 'purple', 'black']);
 
+        const legend = svg.append('g')
+       .attr('class', 'legend')
+       .attr('transform', 'translate(0,0)').call(colorLegend, {
+         colorScale,
+         circleRadius: 5,
+         spacing: 20,
+         textOffset: 20,
+       }).attr('transform', `translate(150,80)`)
       const g = svg.append('g')
-      .attr('transform', `translate(${margin.left}, ${margin.top})`)
+      .attr('transform', `translate(180,150)`)
 
+      .attr('transform', `translate(${margin.left}, ${margin.top})`)
       const xScale = scaleLinear()
               .domain([min(data, d => d.abv), max(data, d => d.abv)])
               .range([0, innerWidth])
@@ -57,11 +71,12 @@ class LineChart extends Component {
       var div = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
       g.selectAll('circle').data(data)
           .enter().append('circle')
-          .attr('cy', d=> yScale(d.ibu))
-          .attr('cx', d => xScale(d.abv))
+          .attr('cy', d=> yScale(d.ibu + Math.random() * 2))
+          .attr('cx', d => xScale(d.abv+ Math.random() * .4))
           .attr("r", 5)
-          .attr("fill", (d) => {
-            return categoryFill(d.category)
+          .attr("fill", (d, index) => {
+            console.log(d.name, index, d.ibu, d.abv);
+            return categoryFill(d.category);
           })
           .attr("opacity", .5)
           .on("mouseover", (d) => {
@@ -78,7 +93,7 @@ class LineChart extends Component {
   }
 
    render() {
-    return <div></div>
+    return <div></div>;
   }
 }
 export default LineChart;
