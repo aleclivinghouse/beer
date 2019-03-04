@@ -10,20 +10,31 @@ class LineChart extends Component {
 
    drawChart(){
      let data = this.props.data;
+     console.log('thi is the data in d3');
+     console.log(data);
      const circleRadius = 18;
      var margin = {top: 20, right: 20, bottom: 70, left: 100};
      let width = 800 - margin.left - margin.right;
-     let height = 500 - margin.top - margin.bottom;
+     let height = 400 - margin.top - margin.bottom;
      const innerWidth = width - margin.left - margin.right;
      const innerHeight = height - margin.top - margin.bottom;
      //this determines the fill of the circles
      const categoryFill = arg => {
-      if(arg === 'Ale'){
+      if(arg === "North American Lager"){
         return 'red';
-      } else if(arg === 'Pilsner'){
+      } else if(arg === "North American Ales"){
         return 'yellow';
-      } else if(arg === 'IPA'){
+      } else if(arg === "North American Origin Ales"){
         return 'orange';
+      }
+       else if(arg === "Hybrid/mixed Beer"){
+        return 'blue';
+      } else if (arg === "Belgian And French Origin Ales"){
+        return 'green';
+      } else if (arg == "Malternative Beverages"){
+        return "purple";
+      } else{
+        return 'black';
       }
      }
 
@@ -42,7 +53,7 @@ class LineChart extends Component {
             .range([innerHeight, 0])
 
       const yAxis = axisLeft(yScale);
-      const xAxis = axisBottom(xScale)
+      const xAxis = axisBottom(xScale);
       var div = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
       g.selectAll('circle').data(data)
           .enter().append('circle')
@@ -52,6 +63,7 @@ class LineChart extends Component {
           .attr("fill", (d) => {
             return categoryFill(d.category)
           })
+          .attr("opacity", .5)
           .on("mouseover", (d) => {
             div.transition()
                 .duration(200)
