@@ -19,6 +19,8 @@ class LineChart extends Component {
      let height = 700 - margin.top - margin.bottom;
      const innerWidth = width - margin.left - margin.right;
      const innerHeight = height - margin.top - margin.bottom;
+      const yAxisLabel = 'IBU';
+      const xAxisLabel = 'ABV(%)';
 
      //this determines the fill of the circles
      const categoryFill = arg => {
@@ -57,8 +59,9 @@ class LineChart extends Component {
        }).attr('transform', `translate(150,80)`)
       const g = svg.append('g')
       .attr('transform', `translate(180,150)`)
-
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
+
+
       const xScale = scaleLinear()
               .domain([min(data, d => d.abv), max(data, d => d.abv)])
               .range([0, innerWidth])
@@ -68,6 +71,33 @@ class LineChart extends Component {
 
       const yAxis = axisLeft(yScale);
       const xAxis = axisBottom(xScale);
+
+    ////////Axis Labels///////////////////////////////////////
+          const yAxisG = g.append('g').call(yAxis);
+      yAxisG.selectAll('.domain').remove();
+
+      yAxisG.append('text')
+          .attr('class', 'axis-label')
+          .attr('y', -40)
+          .attr('x', -innerHeight / 2)
+          .attr('fill', 'black')
+          .attr('transform', `rotate(-90)`)
+          .attr('text-anchor', 'middle')
+          .text(yAxisLabel).style("font-size", "18px");
+
+          const xAxisG = g.append('g').call(xAxis)
+        .attr('transform', `translate(0,${innerHeight})`);
+
+      xAxisG.select('.domain').remove();
+
+      xAxisG.append('text')
+          .attr('class', 'axis-label')
+          .attr('y', 40)
+          .attr('x', innerWidth / 2)
+          .attr('fill', 'black')
+          .text(xAxisLabel).style("font-size", "18px");;
+
+////////////////////////////////////////////////////////////
       var div = d3.select("body").append("div").attr("class", "tooltip").style("opacity", 0);
       g.selectAll('circle').data(data)
           .enter().append('circle')
