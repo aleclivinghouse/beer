@@ -11,8 +11,6 @@ class LineChart extends Component {
 
    drawChart(){
      let data = this.props.data;
-     console.log('thi is the data in d3');
-     console.log(data);
      const circleRadius = 18;
      var margin = {top: 40, right: 20, bottom: 70, left: 100};
      let width = 1000 - margin.left - margin.right;
@@ -105,7 +103,7 @@ class LineChart extends Component {
           .attr('cx', d => xScale(d.abv+ Math.random() * .4))
           .attr("r", 5)
           .attr("fill", (d, index) => {
-            console.log(d.name, index, d.ibu, d.abv);
+            // console.log(d.name, index, d.ibu, d.abv);
             return categoryFill(d.category);
           })
           .attr("opacity", .5)
