@@ -51,7 +51,8 @@ class LineChart extends Component {
      const svg = d3.select("body").append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
-      const colorScale = scaleOrdinal()
+      .attr("align","center")
+  const colorScale = scaleOrdinal()
   .domain(['North American Lager', 'North American Origin Ales', 'Hybrid/mixed Beer', "Belgian And French Origin Ales", "Malternative Beverages", "Other"])
   .range(['red', 'orange', 'blue', 'green', 'purple', 'black']);
 
