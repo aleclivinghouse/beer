@@ -113,7 +113,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-         <h3 className="header">IBU vs. ABV in Various Beers</h3>
+         <h3 className="header">IBU vs. ABV of Various Beers</h3>
         <div className="line-chart-wrapper">
          <LineChart data={this.state.realData}/>
        </div>
