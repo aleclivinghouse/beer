@@ -1,5 +1,4 @@
 .App {
-  text-align: center;
   margin: auto;
 }
 
@@ -27,6 +26,10 @@
 .line-chart-wrapper{
   width: 80%;
   margin: auto;
+}
+
+.header{
+  margin-left: 400px;
 }
 
 .App-link {
