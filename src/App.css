@@ -12,7 +12,7 @@
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
-  display: flex; 
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -35,4 +35,9 @@
 
 .check-label{
   font-size: 10px;
+}
+
+.check-wrapper{
+  text-align: left;
+  margin-left: 100px;
 }

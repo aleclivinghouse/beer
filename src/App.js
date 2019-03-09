@@ -56,6 +56,7 @@ class App extends Component {
         <div className="App">
          <LineChart data={this.state.realData}/>
        </div>
+       <div className="check-wrapper">
        <span className="check-label">North American Lager</span>
        <input type="checkbox" name="North American Lager" onClick={this.handleCheck.bind(this, 'North American Lager')} defaultChecked="checked"/>
         <span className="check-label">North American Ales</span>
@@ -68,6 +69,7 @@ class App extends Component {
        <input type="checkbox" name="Belgian And French Origin Ales" onClick={this.handleCheck.bind(this, "Belgian And French Origin Ales")} defaultChecked="checked"/>
         <span className="check-label">Malternative Beverages</span>
        <input type="checkbox" name="Malternative Beverages" onClick={this.handleCheck.bind(this, "Malternative Beverages")} defaultChecked="checked"/>
+       </div>
       </div>
     );
   }
