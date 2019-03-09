@@ -9,6 +9,10 @@ class LineChart extends Component {
       this.drawChart();
    }
 
+   componentWillReiveProps(nextProps){
+     this.datwChart();
+   }
+
    drawChart(){
      let data = this.props.data;
      const circleRadius = 18;

@@ -26,55 +26,15 @@ class App extends Component {
     console.log(this.state.realData);
     }
 
-    handleCheck1(){
-      if(this.state.categories.indexOf('North American Lager') > -1){
-            this.setState({categories: this.state.categories.filter(item => item !== 'North American Origin Ales')});
+    handleCheck(arg){
+      if(this.state.categories.indexOf(arg) > -1){
+            this.setState({categories: this.state.categories.filter(item => item !== arg)});
             console.log('categories before', this.state.categories);
         } else {
-          this.setState({categories: [...this.state.categories, 'North American Lager']});
+          this.setState({categories: [...this.state.categories, arg]});
             console.log('categories after', this.state.categories);
           this.setState({realData: createData(Beers.data, this.state.categories)  });
         }
-    }
-    handleCheck2(){
-      if(this.state.categories.indexOf('North American Ales') > -1){
-            this.setState({categories: this.state.categories.filter(item => item !== 'North American Ales')});
-            console.log('categories before', this.state.categories);
-        } else {
-          this.setState({categories: [...this.state.categories, 'North American Ales']});
-            console.log('categories after', this.state.categories);
-          this.setState({realData: createData(Beers.data, this.state.categories)  });
-        }
-    }
-    handleCheck3(){
-      if(this.state.categories.indexOf("North American Origin Ales") > -1){
-        this.setState({categories: this.state.categories.filter(item => item !== 'North American Origin Ales')});
-        console.log('categories before 3', this.state.categories);
-      } else {
-        this.setState({categories: [...this.state.categories, 'North American Origin Ales']});
-        console.log('categories after 3', this.state.categories);
-      }
-    }
-    handleCheck4(){
-      if(this.state.categories.indexOf("Hybrid/mixed Beer") > -1){
-        this.setState({categories: this.state.categories.filter(item => item !== 'Hybrid/mixed Beer')});
-      } else {
-        this.setState({categories: [...this.state.categories, 'Hybrid/mixed Beer']});
-      }
-    }
-    handleCheck5() {
-      if(this.state.categories.indexOf("Belgian And French Origin Ales") > -1){
-        this.setState({categories: this.state.categories.filter(item => item !== 'Belgian And French Origin Ales')});
-      } else {
-        this.setState({categories: [...this.state.categories, 'Belgian And French Origin Ales']});
-      }
-    }
-    handleCheck6() {
-      if(this.state.categories.indexOf("Malternative Beverages") > -1){
-        this.setState({categories: this.state.categories.filter(item => item !== 'Malternative Beverages')});
-      } else {
-        this.setState({categories: [...this.state.categories,  'Malternative Beverages']});
-      }
     }
 
 
@@ -85,17 +45,17 @@ class App extends Component {
          <LineChart data={this.state.realData}/>
        </div>
        <span className="check-label">North American Lager</span>
-       <input type="checkbox" onChange={this.handleCheck1.bind(this)} />
+       <input type="checkbox" onChange={this.handleCheck.bind(this, 'North American Lager')} defaultChecked="checked"/>
         <span className="check-label">North American Ales</span>
-       <input type="checkbox" onChange={this.handleCheck2.bind(this)} />
+       <input type="checkbox" onChange={this.handleCheck.bind(this, 'North American Ales')} defaultChecked="checked"/>
          <span className="check-label">North American Origin Ales</span>
-       <input type="checkbox" onChange={this.handleCheck3.bind(this)}/>
+       <input type="checkbox" onChange={this.handleCheck.bind(this, 'North American Origin Ales')} defaultChecked="checked"/>
         <span className="check-label">Hybrid/mixed Beer</span>
-       <input type="checkbox" onChange={this.handleCheck4.bind(this)} />
+       <input type="checkbox" onChange={this.handleCheck.bind(this, "Hybrid/mixed Beer")} defaultChecked="checked"/>
           <span className="check-label">Belgian And French Origin Ales</span>
-       <input type="checkbox" onChange={this.handleCheck5.bind(this)}/>
+       <input type="checkbox" onChange={this.handleCheck.bind(this, "Belgian And French Origin Ales")} defaultChecked="checked"/>
         <span className="check-label">Malternative Beverages</span>
-       <input type="checkbox" onChange={this.handleCheck6.bind(this)}/>
+       <input type="checkbox" onChange={this.handleCheck.bind(this, "Malternative Beverages")} defaultChecked="checked"/>
       </div>
     );
   }
