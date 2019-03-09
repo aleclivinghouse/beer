@@ -93,7 +93,6 @@ class LineChart extends Component {
 
           const xAxisG = g.append('g').call(xAxis)
         .attr('transform', `translate(0,${innerHeight})`);
-
       xAxisG.select('.domain').remove();
 
       xAxisG.append('text')
@@ -115,7 +114,7 @@ class LineChart extends Component {
             return categoryFill(d.category);
           })
           .attr("opacity", .5)
-          .on("mouseover", (d) => {
+          .on("mouseenter", (d) => {
             div.transition()
                 .duration(200)
                 .style("opacity", .9);
@@ -123,6 +122,9 @@ class LineChart extends Component {
                 .style("left", (d3.event.pageX) + "px")
                 .style("top", (d3.event.pageY - 28) + "px");
           })
+          .on("mouseleave", (d) => {
+            div.html( "<br/>")
+          });
           yAxis(g.append('g'));
           xAxis(g.append('g').attr('transform', `translate(0, ${innerHeight})`))
 
