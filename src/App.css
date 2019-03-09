@@ -9,7 +9,10 @@
 }
 
 .switch-wrapper{
-  margin-left: 150px;
+  margin-left: 550px;
+  /* text-align: center;
+  display: block;
+  margin: 0 auto; */
 }
 
 .App-header {
