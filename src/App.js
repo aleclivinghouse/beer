@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import Beers from './beers.js';
 import LineChart from './LineChart';
-import {createData} from './helpers';
+import createData from './helpers';
 class App extends Component {
   constructor(props){
     super(props);
@@ -19,7 +19,6 @@ class App extends Component {
   }
 }
   componentWillMount(){
-    console.log(Beers);
     this.setState({
       realData: createData(Beers.data, this.state.categories)
     });
@@ -27,13 +26,26 @@ class App extends Component {
     }
 
     handleCheck(arg){
-      if(this.state.categories.indexOf(arg) > -1){
-            this.setState({categories: this.state.categories.filter(item => item !== arg)});
-            console.log('categories before', this.state.categories);
+      let flag = false;
+      for(let category of this.state.categories){
+        if(category === arg){
+          flag = true;
+        }
+      }
+      if(flag === true){
+            console.log('categories before filter', this.state.categories);
+            this.setState({categories: this.state.categories.filter(item => item !== arg)},
+            () => {
+              this.setState({realData: createData(Beers.data, this.state.categories)})
+          });
+            console.log('categories after filter', this.state.categories);
         } else {
-          this.setState({categories: [...this.state.categories, arg]});
-            console.log('categories after', this.state.categories);
-          this.setState({realData: createData(Beers.data, this.state.categories)  });
+          console.log('categories before add', this.state.categories);
+          this.setState({categories: [...this.state.categories, arg]},
+            () => {
+            this.setState({realData: createData(Beers.data, this.state.categories)})
+          });
+          console.log('categories after add', this.state.categories);
         }
     }
 
@@ -45,17 +57,17 @@ class App extends Component {
          <LineChart data={this.state.realData}/>
        </div>
        <span className="check-label">North American Lager</span>
-       <input type="checkbox" onChange={this.handleCheck.bind(this, 'North American Lager')} defaultChecked="checked"/>
+       <input type="checkbox" name="North American Lager" onClick={this.handleCheck.bind(this, 'North American Lager')} defaultChecked="checked"/>
         <span className="check-label">North American Ales</span>
-       <input type="checkbox" onChange={this.handleCheck.bind(this, 'North American Ales')} defaultChecked="checked"/>
+       <input type="checkbox" name="North American Ales" onClick={this.handleCheck.bind(this, 'North American Ales')} defaultChecked="checked"/>
          <span className="check-label">North American Origin Ales</span>
-       <input type="checkbox" onChange={this.handleCheck.bind(this, 'North American Origin Ales')} defaultChecked="checked"/>
+       <input type="checkbox" name="North American Origin Ales" onClick={this.handleCheck.bind(this, 'North American Origin Ales')} defaultChecked="checked"/>
         <span className="check-label">Hybrid/mixed Beer</span>
-       <input type="checkbox" onChange={this.handleCheck.bind(this, "Hybrid/mixed Beer")} defaultChecked="checked"/>
+       <input type="checkbox" name ="Hybrid/mixed Beer" onClick={this.handleCheck.bind(this, "Hybrid/mixed Beer")} defaultChecked="checked"/>
           <span className="check-label">Belgian And French Origin Ales</span>
-       <input type="checkbox" onChange={this.handleCheck.bind(this, "Belgian And French Origin Ales")} defaultChecked="checked"/>
+       <input type="checkbox" name="Belgian And French Origin Ales" onClick={this.handleCheck.bind(this, "Belgian And French Origin Ales")} defaultChecked="checked"/>
         <span className="check-label">Malternative Beverages</span>
-       <input type="checkbox" onChange={this.handleCheck.bind(this, "Malternative Beverages")} defaultChecked="checked"/>
+       <input type="checkbox" name="Malternative Beverages" onClick={this.handleCheck.bind(this, "Malternative Beverages")} defaultChecked="checked"/>
       </div>
     );
   }

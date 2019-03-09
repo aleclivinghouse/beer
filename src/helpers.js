@@ -1,4 +1,4 @@
-export function createData(data, categories){
+export default function createData(data, categories){
   let theArray = [];
   for(let dataItem of data){
     if(categories.indexOf(dataItem.style.category.name) > -1){

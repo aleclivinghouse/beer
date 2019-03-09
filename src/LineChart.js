@@ -6,15 +6,19 @@ import { colorLegend } from './ColorLegend';
 
 class LineChart extends Component {
    componentWillMount() {
-      this.drawChart();
+      this.drawChart(this.props.data);
    }
 
-   componentWillReiveProps(nextProps){
-     this.datwChart();
-   }
+   componentDidUpdate(prevProps) {
+  // Typical usage (don't forget to compare props):
+  if (this.props.data !== prevProps.data) {
+    this.drawChart(this.props.data);
+  }
+}
 
-   drawChart(){
-     let data = this.props.data;
+   drawChart(theData){
+     let data = theData;
+     d3.select("body").selectAll("svg").remove();
      const circleRadius = 18;
      var margin = {top: 40, right: 20, bottom: 70, left: 100};
      let width = 1000 - margin.left - margin.right;
