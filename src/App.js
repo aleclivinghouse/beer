@@ -4,6 +4,64 @@ import './App.css';
 import Beers from './beers.js';
 import LineChart from './LineChart';
 import createData from './helpers';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import { withStyles } from '@material-ui/core/styles';
+import purple from '@material-ui/core/colors/purple';
+import orange from '@material-ui/core/colors/orange';
+import blue from '@material-ui/core/colors/blue';
+import green from '@material-ui/core/colors/green';
+import yellow from '@material-ui/core/colors/yellow';
+const styles = theme => ({
+  'colorSwitchBase': {
+    color: purple[300],
+    '&$colorChecked': {
+      color: purple[300],
+      '& + $colorBar': {
+        backgroundColor: purple[300],
+      },
+    },
+  },
+  'colorSwitchBase1': {
+    color: orange[300],
+    '&$colorChecked1': {
+      color: orange[300],
+      '& + $colorBar1': {
+        backgroundColor: orange[300],
+      },
+    },
+  },
+  'colorSwitchBase2': {
+    color: blue[300],
+    '&$colorChecked2': {
+      color: blue[300],
+      '& + $colorBar2': {
+        backgroundColor: blue[300],
+      },
+    },
+  },
+  'colorSwitchBase3': {
+    color: green[300],
+    '&$colorChecked3': {
+      color: green[300],
+      '& + $colorBar3': {
+        backgroundColor: green[300],
+      },
+    },
+  },
+  'colorSwitchBase4': {
+    color: yellow[300],
+    '&$colorChecked4': {
+      color: yellow[300],
+      '& + $colorBar4': {
+        backgroundColor: yellow[300],
+      },
+    },
+  },
+});
+
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -50,32 +108,74 @@ class App extends Component {
     }
 
 
+
+
   render() {
     return (
       <div className="App">
-        <div className="App">
+        <h3 className="heading">IBU vs. ABV in Various Beers</h3>
+        <div>
          <LineChart data={this.state.realData}/>
        </div>
-       <div className="check-wrapper">
-       <span className="check-label">North American Lager</span>
-       <input type="checkbox" name="North American Lager" onClick={this.handleCheck.bind(this, 'North American Lager')} defaultChecked="checked"/>
-        <span className="check-label">North American Ales</span>
-       <input type="checkbox" name="North American Ales" onClick={this.handleCheck.bind(this, 'North American Ales')} defaultChecked="checked"/>
-         <span className="check-label">North American Origin Ales</span>
-       <input type="checkbox" name="North American Origin Ales" onClick={this.handleCheck.bind(this, 'North American Origin Ales')} defaultChecked="checked"/>
-        <span className="check-label">Hybrid/mixed Beer</span>
-       <input type="checkbox" name ="Hybrid/mixed Beer" onClick={this.handleCheck.bind(this, "Hybrid/mixed Beer")} defaultChecked="checked"/>
-          <span className="check-label">Belgian And French Origin Ales</span>
-       <input type="checkbox" name="Belgian And French Origin Ales" onClick={this.handleCheck.bind(this, "Belgian And French Origin Ales")} defaultChecked="checked"/>
-        <span className="check-label">Malternative Beverages</span>
-       <input type="checkbox" name="Malternative Beverages" onClick={this.handleCheck.bind(this, "Malternative Beverages")} defaultChecked="checked"/>
-       </div>
+       <div className="switch-wrapper">
+       <FormGroup row>
+          <FormControlLabel
+            control={
+              <Switch onClick={this.handleCheck.bind(this, 'North American Lager')} classes={{
+                switchBase: this.props.classes.colorSwitchBase,
+                checked: this.props.classes.colorChecked,
+                bar: this.props.classes.colorBar,
+              }}/>
+            }
+            label="American Lager"
+            color="primary"
+          />
+          <FormControlLabel
+            control={
+              <Switch onClick={this.handleCheck.bind(this, 'North American Origin Ales')}  classes={{
+                switchBase: this.props.classes.colorSwitchBase1,
+                checked: this.props.classes.colorChecked1,
+                bar: this.props.classes.colorBar1,
+              }} />
+            }
+            label="American Ales"
+          />
+          <FormControlLabel
+            control={
+              <Switch onClick={this.handleCheck.bind(this, 'Hybrid/mixed Beer')}  classes={{
+                switchBase: this.props.classes.colorSwitchBase2,
+                checked: this.props.classes.colorChecked2,
+                bar: this.props.classes.colorBar2,
+              }}/>
+            }
+            label="Hybrid/mixed Beer"
+          />
+          <FormControlLabel
+           control={<Switch onClick={this.handleCheck.bind(this, 'Belgian And French Origin Ales')} classes={{
+             switchBase: this.props.classes.colorSwitchBase3,
+             checked: this.props.classes.colorChecked3,
+             bar: this.props.classes.colorBar3,
+             }}/>
+            }
+            label="European Ales"
+          />
+          <FormControlLabel
+           control={<Switch onClick={this.handleCheck.bind(this, 'Malternative Beverages')} classes={{
+             switchBase: this.props.classes.colorSwitchBase4,
+             checked: this.props.classes.colorChecked4,
+             bar: this.props.classes.colorBar4,
+             }} />
+            }
+            label="Malternative Beverages"
+          />
+      </FormGroup>
       </div>
+    </div>
     );
   }
 }
 
-export default App;
+export default withStyles(styles)(App);
 
 //http://api.brewerydb.com/v2/brewery/BznahA/beers/?key=71baeb668b3c829308c4eed1fc7b2fdb
 //http://api.brewerydb.com/v2/breweries/?key=71baeb668b3c829308c4eed1fc7b2fdb

@@ -31,7 +31,7 @@ class LineChart extends Component {
      //this determines the fill of the circles
      const categoryFill = arg => {
       if(arg === "North American Lager"){
-        return 'red';
+        return 'purple';
       } else if(arg === "North American Ales"){
         return 'yellow';
       } else if(arg === "North American Origin Ales"){
@@ -42,7 +42,7 @@ class LineChart extends Component {
       } else if (arg === "Belgian And French Origin Ales"){
         return 'green';
       } else if (arg == "Malternative Beverages"){
-        return "purple";
+        return "yellow";
       } else{
         return 'black';
       }
@@ -52,17 +52,10 @@ class LineChart extends Component {
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
       const colorScale = scaleOrdinal()
-  .domain(['North American Lager', 'North American Ales', 'North American Origin Ales', 'Hybrid/mixed Beer', "Belgian And French Origin Ales", "Malternative Beverages", "Other"])
-  .range(['red', 'yellow', 'orange', 'blue', 'green', 'purple', 'black']);
+  .domain(['North American Lager', 'North American Origin Ales', 'Hybrid/mixed Beer', "Belgian And French Origin Ales", "Malternative Beverages", "Other"])
+  .range(['red', 'orange', 'blue', 'green', 'purple', 'black']);
 
-        const legend = svg.append('g')
-       .attr('class', 'legend')
-       .attr('transform', 'translate(0,0)').call(colorLegend, {
-         colorScale,
-         circleRadius: 5,
-         spacing: 20,
-         textOffset: 20,
-       }).attr('transform', `translate(150,80)`)
+      const legend = svg.append('g')
       const g = svg.append('g')
       .attr('transform', `translate(180,150)`)
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
