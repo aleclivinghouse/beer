@@ -114,7 +114,7 @@ class App extends Component {
     return (
       <div className="App">
          <h3 className="header">IBU vs. ABV in Various Beers</h3>
-        <div>
+        <div className="line-chart-wrapper">
          <LineChart data={this.state.realData}/>
        </div>
        <div className="switch-wrapper">

@@ -24,6 +24,11 @@
   color: white;
 }
 
+.line-chart-wrapper{
+  width: 80%;
+  margin: auto;
+}
+
 .App-link {
   color: #61dafb;
 }
